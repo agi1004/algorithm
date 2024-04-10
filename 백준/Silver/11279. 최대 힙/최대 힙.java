@@ -1,0 +1,50 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+  public static void main(String[] args) throws IOException {
+    FastReader fr = new FastReader(); // 문제 해결 소스 코드
+    PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+    int n = fr.nextInt();
+    
+    for (int i = 0; i < n; i++) {
+      int x = fr.nextInt();
+
+      if (x == 0) {
+        if (pq.isEmpty())
+          fr.bw.write(0 + "\n");
+        else
+          fr.bw.write(pq.poll() + "\n");
+      }
+      else
+        pq.offer(x);
+    }
+    fr.bw.flush();
+  }
+    public static class FastReader {
+        BufferedReader br;
+        BufferedWriter bw;
+        StringTokenizer st;
+        public FastReader() { 
+          br = new BufferedReader(new InputStreamReader(System.in)); 
+          bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        }
+        public FastReader(String s) throws FileNotFoundException { br = new BufferedReader(new FileReader(new File(s))); }
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try { st = new StringTokenizer(br.readLine()); }
+                catch (IOException e) { e.printStackTrace(); }
+            }
+            return st.nextToken();
+        }
+        int nextInt() { return Integer.parseInt(next()); }
+        long nextLong() { return Long.parseLong(next()); }
+        double nextDouble() { return Double.parseDouble(next()); }
+        String nextLine() {
+            String str = "";
+            try { str = br.readLine(); }
+            catch (IOException e) { e.printStackTrace(); }
+            return str;
+        }
+    }
+}
