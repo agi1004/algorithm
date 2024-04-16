@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
-		long[][] dp = new long[10][N + 1];
+		int[][] dp = new int[10][N + 1];
 		long count = 0;
 		
 		for (int num = 1; num <= 9; num++) {
