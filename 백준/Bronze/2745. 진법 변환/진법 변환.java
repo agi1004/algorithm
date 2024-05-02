@@ -7,19 +7,9 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		String N = st.nextToken();	
+		String N = st.nextToken();					
 		int B = Integer.parseInt(st.nextToken());
-		int result = 0;
-		
-		int n = N.length() - 1;
-		for (int i = 0; i < N.length(); i++) {
-			if (N.charAt(i) >= 'A') {
-				result += (N.charAt(i) - 55) * Math.pow(B, n--); 
-			} else {
-				result += (N.charAt(i) - '0') * Math.pow(B, n--);
-			}
-		}
-		
-		System.out.println(result);
+        
+		System.out.println(Integer.parseInt(N, B));	// B진수 N -> 10진수
 	}
 }
