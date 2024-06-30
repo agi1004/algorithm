@@ -41,12 +41,12 @@ public class Main {
 		// 단어 순서를 우선순위별로 정렬 
 		words.sort(new Comparator<String>() {
 			public int compare(String o1, String o2) {
-				Integer freq1 = dict.get(o1);	// 앞 단어의 빈도 수
-				Integer freq2 = dict.get(o2);	// 뒷 단어의 빈도 수
+				int freq1 = dict.get(o1);	// 앞 단어의 빈도 수
+				int freq2 = dict.get(o2);	// 뒷 단어의 빈도 수
 				// 두 단어의 빈도 수가 다르다면
-				if (freq1.compareTo(freq2) != 0) {	
+				if (freq1 != freq2) {	
 					// 우선순위 1: 자주 나오는 단어일수록 앞에 배치
-					return freq2.compareTo(freq1);	
+					return freq2 - freq1;	
 				} else {	// 두 단어의 빈도 수가 같다면
 					// 우선순위 2: 해당 단어의 길이가 길수록 앞에 배치
 					return o2.length() - o1.length();
