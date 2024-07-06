@@ -30,11 +30,15 @@ public class Main {
 		// 모든 칸을 탐색
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
+				visited[i][j] = true;	// 현재 칸을 방문 체크
 				// 첫 번째 인자: 현재 칸의 x좌표
 				// 두 번째 인자: 현재 칸의 y좌표
-				// 세 번째 인자: 현재까지 계산된 칸에 쓰인 수들의 합
-				// 네 번째 인자: 현재까지 계산된 칸 개수
-				dfs(i, j, 0, 0);
+				// 세 번째 인자: 현재까지 계산된 칸에 쓰인 수들의 합 => 현재 칸에 적힌 수로 초기화
+				// 네 번째 인자: 현재까지 계산된 칸 개수 => 첫 번째 칸이므로 1
+				dfs(i, j, paper[i][j], 1);
+				visited[i][j] = false;	// 현재 칸을 방문 해제 => 다음 칸으로 이동
+				// ㅗ, ㅜ, ㅓ, ㅏ 모양은 백트래킹으로 탐색이 불가능하므로 따로 처리
+				checkFuckyouShapes(i, j);		
 			}
 		}
 		
@@ -70,8 +74,6 @@ public class Main {
 				// 네 번째 인자: 현재까지 계산된 칸 개수 => 1 증가
 				dfs(nx, ny, sum + paper[nx][ny], depth + 1);
 				visited[nx][ny] = false;	// 인접 칸을 방문 해제 => 다음 칸으로 이동
-				// ㅗ, ㅜ, ㅓ, ㅏ 모양은 백트래킹으로 탐색이 불가능하므로 따로 처리
-				checkFuckyouShapes(nx, ny);	
 			}
 		}
 	}
