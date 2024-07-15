@@ -38,19 +38,18 @@ public class Main {
 	}
 	
 	public static int bfs(int x, int y) {
-		Queue<int[]> queue = new LinkedList<>();
+		Queue<Point> queue = new LinkedList<>();
 		boolean[][] visited = new boolean[N][M];
-		int[][] distance = new int[N][M];
 		
-		queue.add(new int[] {x, y});
+		queue.add(new Point(x, y, 0));
 		visited[x][y] = true;
 		
 		while (!queue.isEmpty()) {
-			int[] now = queue.poll();
+			Point now = queue.poll();
 			
 			for (int i = 0; i < 8; i++) {
-				int nx = now[0] + dx[i];
-				int ny = now[1] + dy[i];
+				int nx = now.x + dx[i];
+				int ny = now.y + dy[i];
 				
 				if (nx < 0 || ny < 0 || nx >= N || ny >= M) {
 					continue;
@@ -61,15 +60,24 @@ public class Main {
 				}
 				
 				if (space[nx][ny] == 1) {
-					return distance[now[0]][now[1]] + 1;
+					return now.dist + 1;
 				}
 				
-				queue.add(new int[] {nx, ny});
+				queue.add(new Point(nx, ny, now.dist + 1));
 				visited[nx][ny] = true;
-				distance[nx][ny] = distance[now[0]][now[1]] + 1;
 			}
 		}
 		
 		return 0;
+	}
+	
+	static class Point {
+		int x, y, dist;
+		
+		Point(int x, int y, int dist) {
+			this.x = x;
+			this.y = y;
+			this.dist = dist;
+		}
 	}
 }
