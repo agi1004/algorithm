@@ -15,7 +15,7 @@ class Solution {
         area = new int[n][m];           // 각 구역마다 번호 부여하는 배열
         int areaNum = 1;                // 구역 번호
         
-        // 모든 칸을 색
+        // 모든 칸을 탐색
         for (int x = 0; x < n; x++) {
             for (int y = 0; y < m; y++) {
                 // 해당 칸을 방문하지 않았고, 석유가 있는 칸이라면
