@@ -4,17 +4,19 @@ class Solution {
     public int[] solution(String[] genres, int[] plays) {
         Map<String, Integer> genrePlays = new HashMap<>();
         Map<String, Integer> genreCounts = new HashMap<>();
+        Map<String, Integer> inputCounts = new HashMap<>();
         
         for (int i = 0; i < plays.length; i++) {
             genrePlays.put(genres[i], genrePlays.getOrDefault(genres[i], 0) + plays[i]);
             genreCounts.put(genres[i], genreCounts.getOrDefault(genres[i], 0) + 1);
+            inputCounts.put(genres[i], 0);
         }
         
         Set<Song> album = new TreeSet<>(new Comparator<>() {
             public int compare(Song s1, Song s2) {
                 if (Integer.compare(genrePlays.get(s2.genre), genrePlays.get(s1.genre)) == 0) {
                     if (Integer.compare(s2.play, s1.play) == 0) {
-                        return Integer.compare(s1.num, s2.num);
+                        return Integer.compare(s1.id, s2.id);
                     }
                     return Integer.compare(s2.play, s1.play);
                 }
@@ -37,15 +39,10 @@ class Solution {
         }
         
         int[] answer = new int[count];
-        int answerIdx = 0;
-        Map<String, Integer> inputCounts = new HashMap<>();
-        
-        for (String genre : genres) {
-            inputCounts.put(genre, 0);
-        }
+        int index = 0;
         
         for (Song song : album) {
-            if (answerIdx == answer.length) {
+            if (index == answer.length) {
                 break;
             }
             
@@ -54,7 +51,7 @@ class Solution {
                 continue;
             }
             
-            answer[answerIdx++] = song.num;
+            answer[index++] = song.id;
             inputCounts.put(song.genre, inputCounts.getOrDefault(song.genre, 0) + 1);
         }
         
@@ -63,12 +60,12 @@ class Solution {
 }
 
 class Song {
-    int num;
+    int id;
     String genre;
     int play;
     
-    Song(int num, String genre, int play) {
-        this.num = num;
+    Song(int id, String genre, int play) {
+        this.id = id;
         this.genre = genre;
         this.play = play;
     }
