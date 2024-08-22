@@ -31,19 +31,16 @@ class Solution {
             }
         }
         
-        if (pq.isEmpty()) {
-            answer = new int[] {0, 0};
-        } else {
+        if (pq.size() == 1) {
+            answer[0] = answer[1] = pq.poll();
+        } else if (pq.size() > 1) {
             answer[0] = pq.poll();
             
-            if (pq.isEmpty()) {
-                answer[1] = answer[0];
-            } else {
-                while (pq.size() > 1) {
-                    pq.poll();
-                }
-                answer[1] = pq.poll();
+            while (pq.size() > 1) {
+                pq.poll();
             }
+            
+            answer[1] = pq.poll();
         }
         
         return answer;
