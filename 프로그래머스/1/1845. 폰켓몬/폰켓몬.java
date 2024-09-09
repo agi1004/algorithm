@@ -4,14 +4,14 @@ class Solution {
     public int solution(int[] nums) {
         int answer = 0;
         int N = nums.length;
-        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> pocketmons = new HashSet<>();
         
         for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            pocketmons.add(num);
         }
         
-        if (map.size() <= N / 2) {
-            answer = map.size();
+        if (pocketmons.size() <= N / 2) {
+            answer = pocketmons.size();
         } else {
             answer = N / 2;
         }
