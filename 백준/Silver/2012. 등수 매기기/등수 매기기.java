@@ -5,21 +5,17 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-		int[] predRanks = new int[N];
-		int[] ranks = new int[N];
-		Queue<Integer> queue = new LinkedList<>();
+		int[] ranks = new int[N + 1];
 		long sum = 0;
 		
-		for (int i = 0; i < N; i++) {
-			predRanks[i] = Integer.parseInt(br.readLine());
-			queue.add(i + 1);
+		for (int i = 1; i <= N; i++) {
+			ranks[i] = Integer.parseInt(br.readLine());
 		}
 		
-		Arrays.sort(predRanks);
+		Arrays.sort(ranks);
 		
-		for (int i = 0; i < N; i++) {
-			ranks[i] = queue.poll();
-			sum += Math.abs(predRanks[i] - ranks[i]);
+		for (int i = 1; i <= N; i++) {
+			sum += Math.abs(ranks[i] - i);
 		}
 		
 		System.out.println(sum);
