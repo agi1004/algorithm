@@ -6,6 +6,7 @@ public class Main {
 	static int[] dy = {0, 0, -1, 1};
 	static int N, M;
 	static int[][] map;
+	static int[][] counts;
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,54 +14,49 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 		N = Integer.parseInt(st.nextToken());
 		map = new int[N + 1][M + 1];
+		counts = new int[N + 1][M + 1];
 		
 		for (int i = 1; i <= N; i++) {
 			String line = br.readLine();
 			for (int j = 1; j <= M; j++) {
 				map[i][j] = line.charAt(j - 1) - '0';
+				counts[i][j] = Integer.MAX_VALUE;
 			}
 		}
 		
-		System.out.println(bfs(1, 1));
+		System.out.println(dijkstra());
 	}
 	
-	public static int bfs(int startX, int startY) {
+	public static int dijkstra() {
 		Queue<Point> pq = new PriorityQueue<>();
-		boolean[][] visited = new boolean[N + 1][M + 1];
 		
-		pq.add(new Point(startX, startY, 0));
-		visited[startX][startY] = true;
+		counts[1][1] = 0;
+		pq.add(new Point(1, 1, 0));
 		
 		while (!pq.isEmpty()) {
 			Point now = pq.poll();
 			
-			if (now.x == N && now.y == M) {
-				return now.count;
-			}
-			
 			for (int i = 0; i < 4; i++) {
 				int nx = now.x + dx[i];
 				int ny = now.y + dy[i];
+				int count = now.count;
 				
 				if (nx < 1 || ny < 1 || nx > N || ny > M) {
 					continue;
 				}
 				
-				if (visited[nx][ny]) {
-					continue;
-				}
-				
 				if (map[nx][ny] == 1) {
-					pq.add(new Point(nx, ny, now.count + 1));
-				} else {
-					pq.add(new Point(nx, ny, now.count));
+					count++;
 				}
 				
-				visited[nx][ny] = true;
+				if (counts[nx][ny] > count) {
+					counts[nx][ny] = count;
+					pq.add(new Point(nx, ny, count));
+				}
 			}
 		}
 		
-		return -1;
+		return counts[N][M];
 	}
 	
 	static class Point implements Comparable<Point> {
