@@ -25,7 +25,7 @@ public class Main {
 	}
 	
 	public static int bfs(int startX, int startY) {
-		Queue<Point> pq = new PriorityQueue<>((o1, o2) -> o1.count - o2.count);
+		Queue<Point> pq = new PriorityQueue<>();
 		boolean[][] visited = new boolean[N + 1][M + 1];
 		
 		pq.add(new Point(startX, startY, 0));
@@ -63,13 +63,17 @@ public class Main {
 		return -1;
 	}
 	
-	static class Point {
+	static class Point implements Comparable<Point> {
 		int x, y, count;
 		
 		Point(int x, int y, int count) {
 			this.x = x;
 			this.y = y;
 			this.count = count;
+		}
+		
+		public int compareTo(Point p) {
+			return this.count - p.count;
 		}
 	}
 }
