@@ -27,7 +27,6 @@ class Solution {
             findMax(order);
         }
         
-        
         return answer;
     }
     
@@ -45,10 +44,6 @@ class Solution {
                 index = tempOps.indexOf(order[1]);
             } else {
                 index = tempOps.indexOf(order[2]);
-            }
-            
-            if (index == -1) {
-                break;
             }
             
             char op = tempOps.remove(index);
