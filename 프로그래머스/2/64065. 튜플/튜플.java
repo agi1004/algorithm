@@ -3,19 +3,8 @@ import java.util.*;
 class Solution {
     public int[] solution(String s) {
         int[] answer = {};
+        String[] nums = s.replace("{", "").replace("}", "").split(",");
         Map<Integer, Integer> map = new TreeMap<>();
-        
-        s = s.substring(1, s.length() - 1);
-        
-        s = s.replace("{", "");
-        s = s.replace("}", "");
-        
-        if (!s.contains(",")) {
-            answer = new int[] {Integer.parseInt(s)};
-            return answer;
-        }
-        
-        String[] nums = s.split(",");
         
         for (String num : nums) {
             int digit = Integer.parseInt(num);
