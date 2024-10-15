@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String s) {
-        int[] answer = {};
         String[] nums = s.replace("{", "").replace("}", "").split(",");
         Map<Integer, Integer> map = new TreeMap<>();
         
@@ -15,7 +14,7 @@ class Solution {
         
         keys.sort((o1, o2) -> map.get(o2) - map.get(o1));
         
-        answer = new int[map.size()];
+        int[] answer = new int[map.size()];
         int index = 0;
         
         for (int digit : keys) {
