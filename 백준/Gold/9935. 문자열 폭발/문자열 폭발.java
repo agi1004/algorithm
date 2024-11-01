@@ -13,7 +13,7 @@ public class Main {
 		
 		bomb(str, bombStr, len);
 		
-		String result = getResult();
+		String result = pop(stack.size());
 		
 		if (result.isEmpty()) {
 			System.out.println(EMPTY);
@@ -21,7 +21,6 @@ public class Main {
 		}
 		
 		System.out.println(result);
-		
 	}
 	
 	public static void bomb(String str, String bombStr, int len) {
@@ -29,37 +28,28 @@ public class Main {
 			stack.push(ch);
 			
 			if (stack.size() >= len && ch == bombStr.charAt(len - 1)) {
-				StringBuilder sb = new StringBuilder();
+				String partStr = pop(len);
 				
-				append(sb, len);
-				
-				if (!sb.toString().equals(bombStr)) {
-					push(sb, len);
+				if (!partStr.equals(bombStr)) {
+					push(partStr, len);
 				}
 			}
 		}
 	}
 	
-	public static String getResult() {
+	public static String pop(int len) {
 		StringBuilder sb = new StringBuilder();
 		
-		while (!stack.isEmpty()) {
+		for (int i = 0; i < len; i++) {
 			sb.append(stack.pop());
 		}
 		
 		return sb.reverse().toString();
 	}
 	
-	private static void append(StringBuilder sb, int len) {
+	public static void push(String partStr, int len) {
 		for (int i = 0; i < len; i++) {
-			sb.append(stack.pop());
-		}
-		sb.reverse();
-	}
-	
-	private static void push(StringBuilder sb, int len) {
-		for (int i = 0; i < len; i++) {
-			stack.push(sb.charAt(i));
+			stack.push(partStr.charAt(i));
 		}
 	}
 }
