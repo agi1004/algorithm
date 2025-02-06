@@ -5,12 +5,7 @@ class Solution {
         int[] answer = new int[N];
         int[] counts = new int[N + 1];
         int sum = stages.length;
-        PriorityQueue<Stage> pq = new PriorityQueue<>((o1, o2) -> {
-            if (Double.compare(o2.rate, o1.rate) == 0) {
-                return Integer.compare(o1.num, o2.num);
-            }
-            return Double.compare(o2.rate, o1.rate);
-        });
+        PriorityQueue<Stage> pq = new PriorityQueue<>();
         
         for (int num : stages) {
             if (num > N) continue;
@@ -35,13 +30,20 @@ class Solution {
         return answer;
     }
     
-    static class Stage {
+    static class Stage implements Comparable<Stage> {
         int num;
         double rate;
         
         Stage(int num, double rate) {
             this.num = num;
             this.rate = rate;
+        }
+        
+        public int compareTo(Stage o) {
+            if (Double.compare(o.rate, this.rate) == 0) {
+                return Integer.compare(this.num, o.num);
+            }
+            return Double.compare(o.rate, this.rate);
         }
     }
 }
